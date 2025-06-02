@@ -9,17 +9,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tasks")
+@RequestMapping("/api/tasks")
 public class TaskController {
     @Autowired
     private TaskService taskService;
+
+    @PostMapping
+    public Task addTask(@RequestBody Task task) {
+        return taskService.addTask(task);
+    }
+
+    @GetMapping("/{id}")
+    public Task getTaskById(@PathVariable Long id) {
+        return taskService.getTaskById(id);
+    }
+
     @GetMapping
     public List<Task> getAllTasks() {
         return taskService.getAllTasks();
     }
-    @PostMapping
-    public Task addTask(@RequestBody Task task) {
-        taskService.addTask(task);
-        return task;
+
+    @PutMapping("/{id}")
+    public Task updateTask(@PathVariable Long id, @RequestBody Task task) {
+        return taskService.updateTask(id, task);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteTaskById(@PathVariable Long id) {
+        taskService.deleteTask(id);
+    }
+
 }
