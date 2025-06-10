@@ -1,5 +1,7 @@
 package com.example.ToDoList.controller;
 
+import com.example.ToDoList.dto.TaskRequestDto;
+import com.example.ToDoList.dto.TaskResponseDto;
 import com.example.ToDoList.model.Task;
 import com.example.ToDoList.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,23 +17,23 @@ public class TaskController {
     private TaskService taskService;
 
     @PostMapping
-    public Task addTask(@RequestBody Task task) {
-        return taskService.addTask(task);
+    public TaskResponseDto addTask(@RequestBody TaskRequestDto requestDto) {
+        return taskService.addTask(requestDto);
     }
 
     @GetMapping("/{id}")
-    public Task getTaskById(@PathVariable Long id) {
+    public TaskResponseDto getTaskById(@PathVariable Long id) {
         return taskService.getTaskById(id);
     }
 
     @GetMapping
-    public List<Task> getAllTasks() {
+    public List<TaskResponseDto> getAllTasks() {
         return taskService.getAllTasks();
     }
 
     @PutMapping("/{id}")
-    public Task updateTask(@PathVariable Long id, @RequestBody Task task) {
-        return taskService.updateTask(id, task);
+    public TaskResponseDto updateTask(@PathVariable Long id, @RequestBody TaskRequestDto requestDto) {
+        return taskService.updateTask(id, requestDto);
     }
 
     @DeleteMapping("/{id}")
