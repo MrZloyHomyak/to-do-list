@@ -16,4 +16,8 @@ public class Task {
     private String description;
     @Column(columnDefinition = "boolean default false")
     private boolean completed;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 }
